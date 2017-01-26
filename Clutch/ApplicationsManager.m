@@ -119,14 +119,14 @@ typedef NSDictionary* (*MobileInstallationLookup)(NSDictionary *options);
     {
         NSString *appType = [proxy performSelector:@selector(applicationType)];
         
-        if ([appType isEqualToString:@"User"] && proxy.bundleContainerURL && proxy.bundleURL)
+        if (proxy.bundleContainerURL && proxy.bundleURL)
         {
             NSString *scinfo = [proxy.bundleURL.path stringByAppendingPathComponent:@"SC_Info"];
             
             BOOL isDirectory;
             BOOL purchased = [[NSFileManager defaultManager] fileExistsAtPath:scinfo isDirectory:&isDirectory];
             
-            if (purchased && isDirectory)
+            if (isDirectory)
             {
                 NSString *itemName = ((LSApplicationProxy*)proxy).itemName;
                 
